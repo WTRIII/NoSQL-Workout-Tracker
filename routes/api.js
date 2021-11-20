@@ -1,26 +1,69 @@
 const router = require("express").Router();
 const Workout = require("../models/workout.js");
+const path = require("path");
+
+//renders exercise html
+router.get("/exercise", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/exercise.html"));
+});
+
+//renders stats html
+router.get("/stats", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
 
 // find workouts
-router.get("/api/workout", (req, res) => {
-  Workout.find({})
-    .sort({ date: -1 })
-    .then(dbFit => {
-      res.json(dbFit);
+router.get('/api/workouts', (req, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: {
+          $sum: '$exercises.duration',
+        },
+      },
+    },
+  ])
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
     })
-    .catch(err => {
-      res.status(400).json(err);
+    .catch((err) => {
+      res.json(err);
     });
 });
 
+// Mitchell worked with me to get the second get request setup
+// found reference in public api.js
+router.get('/api/workouts/range', (req, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: {
+          $sum: '$exercises.duration',
+        },
+      },
+    },
+  ])
+    .sort({ _id: -1 })
+    .limit(7)
+    .then((dbWorkouts) => {
+      console.log(dbWorkouts);
+      res.json(dbWorkouts);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+
 // update existing workout by id
-router.put("/api/workout/:id", ({ body, params }, res) => {
+router.put("/api/workouts/:id", ({ body, params }, res) => {
   Workout.findByIdAndUpdate(
     params.id,
-    { $push: { exercises: body } }
+    { $push: { exercises: body } },
+    { new: true}
   )
-    .then(dbFit => {
-      res.json(dbFit);
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -28,10 +71,10 @@ router.put("/api/workout/:id", ({ body, params }, res) => {
 });
 
 // creates a new workout
-router.post("/api/workout", ({ body }, res) => {
-  Workout.create(body)
-    .then(dbFit => {
-      res.json(dbFit);
+router.post("/api/workouts", (req, res) => {
+  Workout.create({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
