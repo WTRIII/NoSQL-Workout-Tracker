@@ -1,34 +1,51 @@
 const router = require("express").Router();
 const Workout = require("../models/workout.js");
 
+// find workouts
+router.get("/api/workout", (req, res) => {
+  Workout.find({})
+    .sort({ date: -1 })
+    .then(dbFit => {
+      res.json(dbFit);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+// update existing workout by id
+router.put("/api/workout/:id", ({ body, params }, res) => {
+  Workout.findByIdAndUpdate(
+    params.id,
+    { $push: { exercises: body } }
+  )
+    .then(dbFit => {
+      res.json(dbFit);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+// creates a new workout
 router.post("/api/workout", ({ body }, res) => {
   Workout.create(body)
-    .then(dbFitness => {
-      res.json(dbFitness);
+    .then(dbFit => {
+      res.json(dbFit);
     })
     .catch(err => {
       res.status(400).json(err);
     });
 });
 
-router.post("/api/transaction/bulk", ({ body }, res) => {
-  Workout.insertMany(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+// deletes a workout by id
+router.delete('/api/workouts', ({ body }, res) => {
+  Workout.findByIdAndDelete(body.id)
+    .then(() => {
+      res.json(true);
     })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
-
-router.get("/api/transaction", (req, res) => {
-  Transaction.find({})
-    .sort({ date: -1 })
-    .then(dbTransaction => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
+    .catch((err) => {
+      res.json(err);
     });
 });
 
