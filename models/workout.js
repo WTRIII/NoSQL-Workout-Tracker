@@ -2,37 +2,55 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const workout = new Workout ([
-    {
-      day: new Date(new Date().setDate(new Date().getDate() - 9)),
-      exercises: [
-        {
-          type: 'resistance',
-          name: 'Bicep Curl',
-          duration: 20,
-          weight: 100,
-          reps: 10,
-          sets: 4,
-        },
-      ],
-    }])
+// const workout = new Workout ([
+//     {
+//       day: new Date(new Date().setDate(new Date().getDate() - 9)),
+//       exercises: [
+//         {
+//           type: 'resistance',
+//           name: 'Bicep Curl',
+//           duration: 20,
+//           weight: 100,
+//           reps: 10,
+//           sets: 4,
+//         },
+//       ],
+//     }])
   
-    // const transactionSchema = new Schema({
-    //     name: {
-    //       type: String,
-    //       trim: true,
-    //       required: "Enter a name for transaction"
-    //     },
-    //     value: {
-    //       type: Number,
-    //       required: "Enter an amount"
-    //     },
-    //     date: {
-    //       type: Date,
-    //       default: Date.now
-    //     }
-    //   });
+    const swollSchema = new Schema({
+      day: {
+        type: Date,
+        default: Date.now
+      },
+        type:{
+          type: String,
+          trim: true,
+          required: 'Swollification Type'
+        },
+        name: {
+          type: String,
+          trim: true,
+          required: "Swollification Name"
+        },
+        duration: {
+          type: Number,
+          required: 'Swollification duration'
+        },
+        weight: {
+          type: Number,
+          required: "Input amount of iron moved"
+        },
+        reps: {
+          type: Number
+        },
+        sets: {
+          type: Number
+        },
+        distance: {
+          type: Number
+        }
+      });
       
-    //   const Transaction = mongoose.model("Transaction", transactionSchema);
+      const Workout = mongoose.model("Workout", swollSchema);
       
-    //   module.exports = Transaction;
+      module.exports = Workout;

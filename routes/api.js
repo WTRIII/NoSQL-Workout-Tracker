@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const Transaction = require("../models/transaction.js");
+const Workout = require("../models/workout.js");
 
-router.post("/api/transaction", ({ body }, res) => {
-  Transaction.create(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+router.post("/api/workout", ({ body }, res) => {
+  Workout.create(body)
+    .then(dbFitness => {
+      res.json(dbFitness);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -12,7 +12,7 @@ router.post("/api/transaction", ({ body }, res) => {
 });
 
 router.post("/api/transaction/bulk", ({ body }, res) => {
-  Transaction.insertMany(body)
+  Workout.insertMany(body)
     .then(dbTransaction => {
       res.json(dbTransaction);
     })
