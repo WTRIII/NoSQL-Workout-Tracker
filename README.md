@@ -1,7 +1,35 @@
 # NoSQL-Workout-Tracker
 
-# Unit 18 Nosql Homework: Workout Tracker
+## Summary
 
+A client requested backend code for a workout tracker app using a non-SQL database.
+A database was creating using MongoDB and a working product completed.
+
+Features implemented include:
+- a database that can receive and return workouts input by the user
+- information that can be updated or deleted
+- integration of the database with the front-end dashboard page
+- integration of the database with the front-end stats page
+
+## Landing Page:
+![screenshot 1: main page](references/Main-page.png)
+
+## Creating a New Workout
+![screenshot 2: new workout](references/new-workout.png)
+
+## Viewing the Dashboard
+![screenshot 3: dashboard](references/dashboard.png)
+
+### Help Received:
+
+I collaborated with Mitchell Robbins to debug routing and various other issues that I needed to resolve to get the code to work. I also referenced various miniprojects, previous homeworks, and assignments that I could adapt code to for this assignment.
+
+
+----------
+# Original User Story and Acceptance Criteria Follows:
+----------
+
+# Unit 18 Nosql Homework: Workout Tracker
 For this assignment, you'll create a workout tracker. You have already been provided with the front end code in the `Develop` folder. This assignment will require you to create Mongo database with a Mongoose schema and handle routes with Express.
 
 ## User Story
