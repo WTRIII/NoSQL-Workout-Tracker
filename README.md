@@ -11,6 +11,8 @@ Features implemented include:
 - integration of the database with the front-end dashboard page
 - integration of the database with the front-end stats page
 
+## Live Site: https://nosql-workout-tracker-wtriii.herokuapp.com/
+
 ## Landing Page:
 ![screenshot 1: main page](references/Main-page.PNG)
 
