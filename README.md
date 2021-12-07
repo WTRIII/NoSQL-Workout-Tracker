@@ -12,13 +12,13 @@ Features implemented include:
 - integration of the database with the front-end stats page
 
 ## Landing Page:
-![screenshot 1: main page](references/Main-page.png)
+![screenshot 1: main page](references/Main-page.PNG)
 
 ## Creating a New Workout
-![screenshot 2: new workout](references/new-workout.png)
+![screenshot 2: new workout](references/new-workout.PNG)
 
 ## Viewing the Dashboard
-![screenshot 3: dashboard](references/dashboard.png)
+![screenshot 3: dashboard](references/dashboard.PNG)
 
 ### Help Received:
 
